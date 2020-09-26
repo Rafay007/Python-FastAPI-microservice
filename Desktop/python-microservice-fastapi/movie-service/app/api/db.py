@@ -5,19 +5,20 @@ from sqlalchemy import (Column, DateTime, Integer, MetaData, String, Table,
 
 from databases import Database
 
-DATABASE_URI = os.getenv('DATABASE_URI')
+DATABASE_URI = 'postgresql://postgres:rafay@localhost:5432/api_database'
 
 engine = create_engine(DATABASE_URI)
 metadata = MetaData()
 
 movies = Table(
-    'movies',
+    'movie_db.movies',
     metadata,
     Column('id', Integer, primary_key=True),
     Column('name', String(50)),
     Column('plot', String(250)),
     Column('genres', ARRAY(String)),
-    Column('casts_id', ARRAY(Integer))
+    Column('casts', ARRAY(String))
 )
 
 database = Database(DATABASE_URI)
+
